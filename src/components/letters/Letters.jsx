@@ -1,20 +1,24 @@
+import propTypes from 'prop-types'
 import Letter from './Letter'
 import './Letters.css'
 
-const Letters = () => {
+const Letters = (props) => {
+
+    const lettersElement = props.word.split('').map((el, index) => (
+        <Letter key={index} value={el} />
+    ))
+    
+
     // for false answer: color: #EC5D49
     return(
         <section className="letters">
-            <Letter value='r'/>
-            <Letter value='e'/>
-            <Letter value=''/>
-            <Letter value='a'/>
-            <Letter value=''/>
-            <Letter value='t'/>
-            <Letter value=''/>
-            <Letter value='r'/>
+            {lettersElement}
         </section>
     )
+}
+
+Letters.propTypes = {
+    word: propTypes.string
 }
 
 export default Letters

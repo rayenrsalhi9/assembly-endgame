@@ -1,0 +1,32 @@
+.keyboard {
+    max-width: 480px;
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+}
+
+.keyboard > button {
+    width: 40px;
+    height: 40px;
+
+    background: #FCBA29;
+    color: #1E1E1E;
+    text-align: center;
+
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+
+    font-family: "Hanken Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+
+    cursor: pointer;
+    transition: .4s;
+}
+
+.keyboard > button:hover {
+    transform: scale(1.05);
+}

@@ -1,0 +1,23 @@
+.screen {
+    width: 352px;
+    height: 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: #10A95B;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+.screen > h1 {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.screen > p {
+    font-size: 16px;
+    font-weight: 500;
+}

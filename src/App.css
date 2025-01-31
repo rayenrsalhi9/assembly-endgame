@@ -1,0 +1,8 @@
+.app-container {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px;
+}

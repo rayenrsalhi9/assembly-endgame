@@ -1,0 +1,16 @@
+.items-list {
+    max-width: 254px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.items-list > span {
+    padding: 4.5px;
+    border-radius: 4px;
+
+    font-size: 12px;
+    font-weight: 700;
+}

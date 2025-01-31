@@ -1,0 +1,17 @@
+header {
+    width: 352px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+header > h1 {
+    color: #F9F4DA;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+header > p {
+    color: #8E8E8E;
+    font-weight: 500;
+    font-size: 14px;
+}

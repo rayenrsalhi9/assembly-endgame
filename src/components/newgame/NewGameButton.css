@@ -1,0 +1,28 @@
+button.new-game-button {
+    width: 228px;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #1E1E1E;
+    background: #11B5E5;
+
+    font-family: "Hanken Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+
+    padding: 6px 12px;
+
+    cursor: pointer;
+    transition: .4s;
+}
+
+button.new-game-button:hover {
+    background: #0f9fcb;
+    color: #111;
+}

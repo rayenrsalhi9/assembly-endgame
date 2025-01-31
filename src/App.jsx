@@ -8,28 +8,79 @@ import NewGameButton from "./components/newgame/NewGameButton"
 import './App.css'
 
 const App = () => {
-  // get a random word
+  
   const [word, setWord] = useState('');
+  const [wordGuess, setWordGuess] = useState([])
+  const [gameOver, setGameOver] = useState(false)
+
+  const fetchApi = () => {
+    fetch('https://api.datamuse.com/words?ml=programming')
+        .then(data => data.json())
+        .then(res => res.map(el => el.word))
+        .then(res => res.filter(el => el.length <= 10))
+        .then(res => res[Math.floor(Math.random() * res.length)])
+        .then(res => setWord(res))
+  }
 
   useEffect(() => {
-    fetch('https://api.datamuse.com/words?ml=programming')
-      .then(data => data.json())
-      .then(res => res.map(el => el.word))
-      .then(res => res.filter(el => el.length <= 10))
-      .then(res => res[Math.floor(Math.random() * res.length)])
-      .then(res => setWord(res))
+    fetchApi()
   }, [])
+  
+  useEffect(() => {
+    !gameOver &&
+      fetchApi()
+  }, [gameOver])
 
-  // handle buttons click
+  useEffect(() => {
+    setWordGuess(Array(word.length).fill({
+      value: '',
+      isCorrect: null
+    }))
+  }, [word])
+
+  useEffect(() => {
+    if (!gameOver && wordGuess.every(el => el.value !== '')) {
+      setGameOver(true);
+    }
+  }, [wordGuess, gameOver])
+  
+  const numberOfOccurences = (guessValue) => {
+    let occurences = []
+    for (let i = 0; i < word.length; i++) {
+      if (guessValue === word[i]) {
+        occurences.push(i)
+      }
+    }
+    return occurences
+  }
+
+  const handleClick = (guessValue) => {  
+    if (!gameOver) {
+      const occurrences = numberOfOccurences(guessValue);
+      if (occurrences.length > 0) {
+        occurrences.map(occurenceIndex => {
+          setWordGuess(prevGuess => prevGuess.map((el, index) => {
+            return index === occurenceIndex ?
+              {...el, value: guessValue} :
+              el  
+          }))
+        })
+      }
+    }
+  }
+
+  const replay = () => {
+    setGameOver(false)
+  }
 
   return(
     <main className="app-container">
       <Header />
-      <Screen />
+      {gameOver && <Screen />}
       <List />
-      <Letters word={word}/>
-      <Keyboard />
-      <NewGameButton />
+      <Letters wordGuess={wordGuess}/>
+      <Keyboard handleClick={handleClick}/>
+      {gameOver && <NewGameButton  replay={replay}/>}
     </main>
   )
 }

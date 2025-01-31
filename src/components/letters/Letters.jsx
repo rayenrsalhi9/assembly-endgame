@@ -4,12 +4,10 @@ import './Letters.css'
 
 const Letters = (props) => {
 
-    const lettersElement = props.word.split('').map((el, index) => (
-        <Letter key={index} value={el} />
+    const lettersElement = props.wordGuess.map((el, index) => (
+        <Letter key={index} el={el} />
     ))
     
-
-    // for false answer: color: #EC5D49
     return(
         <section className="letters">
             {lettersElement}
@@ -18,7 +16,7 @@ const Letters = (props) => {
 }
 
 Letters.propTypes = {
-    word: propTypes.string
+    wordGuess: propTypes.array
 }
 
 export default Letters

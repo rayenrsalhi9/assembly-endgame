@@ -11,7 +11,7 @@ import './App.css'
 const App = () => {
   const [word, setWord] = useState('');
   const [wordGuess, setWordGuess] = useState([])
-  const [gameOver, setGameOver] = useState(false)
+  const [gameOver, setGameOver] = useState(true)
   const [allKeys, setAllKeys] = useState(renderAllKeys())
 
   const fetchApi = () => {
@@ -26,11 +26,6 @@ const App = () => {
   useEffect(() => {
     fetchApi()
   }, [])
-  
-  useEffect(() => {
-    !gameOver &&
-      fetchApi()
-  }, [gameOver])
 
   useEffect(() => {
     setWordGuess(Array(word.length).fill({
@@ -64,7 +59,6 @@ const App = () => {
             {...el, value: guessLetter.value} :
             el  
         }))
-        //guessLetter.isCorrect = true
         setAllKeys(prev => prev.map(el => {
           return el.value === guessLetter.value ?
                 {...el, isCorrect: true, isDisabled: true} :
@@ -81,6 +75,7 @@ const App = () => {
   }
 
   const replay = () => {
+    fetchApi()
     setGameOver(false)
     setAllKeys(renderAllKeys())
   }

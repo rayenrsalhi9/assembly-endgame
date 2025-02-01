@@ -10,6 +10,17 @@
     background: #10A95B;
     padding: 6px;
     border-radius: 4px;
+
+    animation: showUp 1s ease-in;
+}
+
+@keyframes showUp {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .screen > h1 {

@@ -40,10 +40,10 @@ const App = () => {
   }, [word])
 
   useEffect(() => {
-    if (!gameOver && wordGuess.every(el => el.value !== '')) {
-      setGameOver(true);
+    if (wordGuess.every(el => el.value !== '')) {
+      setGameOver(prev => !prev);
     }
-  }, [gameOver, wordGuess])
+  }, [wordGuess])
   
   const numberOfOccurences = (guessValue) => {
     let occurences = []

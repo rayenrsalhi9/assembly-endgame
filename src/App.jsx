@@ -20,7 +20,7 @@ const App = () => {
         .then(res => res.map(el => el.word))
         .then(res => res.filter(el => el.length <= 10 && el.length >= 4))
         .then(res => res[Math.floor(Math.random() * res.length)])
-        .then(res => setWord(res))
+        .then(res => setWord(res.toUpperCase()))
   }
 
   useEffect(() => {
@@ -55,18 +55,20 @@ const App = () => {
     return occurences
   }
 
-  const handleClick = (guessValue) => {  
+  const handleClick = (guessLetter) => {  
     if (!gameOver) {
-      const occurrences = numberOfOccurences(guessValue);
+      const occurrences = numberOfOccurences(guessLetter.value);
       if (occurrences.length > 0) {
-        occurrences.map(occurenceIndex => {
-          setWordGuess(prevGuess => prevGuess.map((el, index) => {
-            return index === occurenceIndex ?
-              {...el, value: guessValue} :
-              el  
-          }))
-        })
+        setWordGuess(prevGuess => prevGuess.map((el, index) => {
+          return occurrences.includes(index) ?
+            {...el, value: guessLetter.value} :
+            el  
+        }))
+        guessLetter.isCorrect = true
+      } else {
+        guessLetter.isCorrect = false
       }
+      guessLetter.isDisabled = true
     }
   }
 

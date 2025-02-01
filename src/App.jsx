@@ -18,7 +18,7 @@ const App = () => {
     fetch('https://api.datamuse.com/words?ml=programming')
         .then(data => data.json())
         .then(res => res.map(el => el.word))
-        .then(res => res.filter(el => el.length <= 10))
+        .then(res => res.filter(el => el.length <= 10 && el.length >= 4))
         .then(res => res[Math.floor(Math.random() * res.length)])
         .then(res => setWord(res))
   }

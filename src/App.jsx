@@ -6,13 +6,17 @@ import Letters from "./components/letters/Letters"
 import Keyboard from "./components/keyboard/Keyboard"
 import NewGameButton from "./components/newgame/NewGameButton"
 import ReactConfetti from 'react-confetti'
+import emptyHeart from './assets/empty-heart.png'
+import fullHeart from './assets/filled-heart.png'
 import './App.css'
 
 const App = () => {
   const [word, setWord] = useState('');
   const [wordGuess, setWordGuess] = useState([])
-  const [gameOver, setGameOver] = useState(false)
+  const [gameOver, setGameOver] = useState(true)
   const [allKeys, setAllKeys] = useState(renderAllKeys())
+  const [hearts, setHearts] = useState(renderHearts())
+  const [count, setCount] = useState(0)
 
   const fetchApi = () => {
     fetch('https://api.datamuse.com/words?ml=programming')
@@ -70,6 +74,11 @@ const App = () => {
                 {...el, isCorrect: false, isDisabled: true} :
                 el
         }))
+        setHearts(prevHearts => prevHearts.map((el, index) => {
+          return index === count ?
+          {...el, src: emptyHeart} : el
+        }))
+        setCount(prevCount => prevCount + 1)
       }
     }
   }
@@ -78,6 +87,8 @@ const App = () => {
     fetchApi()
     setGameOver(false)
     setAllKeys(renderAllKeys())
+    setHearts(renderHearts())
+    setCount(0)
   }
 
   function renderAllKeys() {
@@ -96,11 +107,19 @@ const App = () => {
     return allKeys
   }
 
+  function renderHearts() {
+    const hearts = Array(10).fill({
+        src: fullHeart,
+        alt: 'full heart icon'
+    })
+    return hearts
+  }
+
   return(
     <main className="app-container">
       <Header />
       {gameOver && <Screen />}
-      <List />
+      <List hearts={hearts}/>
       <Letters wordGuess={wordGuess}/>
       <Keyboard handleClick={handleClick} allKeys={allKeys}/>
       {gameOver && <NewGameButton  replay={replay}/>}

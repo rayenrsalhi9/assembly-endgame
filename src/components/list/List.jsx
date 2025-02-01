@@ -1,14 +1,8 @@
 import Item from './Item'
-//import emptyHeart from '../../assets/empty-heart.png'
-import fullHeart from '../../assets/filled-heart.png'
+import propTypes from 'prop-types'
 import './List.css'
 
-const List = () => {
-
-    const hearts = Array(10).fill({
-        src: fullHeart,
-        alt: 'full heart icon'
-    })
+const List = ({hearts}) => {
 
     const itemsElement = hearts.map((heart, index) => (
         <Item key={index} heart={heart} />
@@ -19,6 +13,10 @@ const List = () => {
             {itemsElement}
         </section>
     )
+}
+
+List.propTypes = {
+    hearts: propTypes.array
 }
 
 export default List;

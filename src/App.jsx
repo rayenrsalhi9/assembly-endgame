@@ -64,16 +64,25 @@ const App = () => {
             {...el, value: guessLetter.value} :
             el  
         }))
-        guessLetter.isCorrect = true
+        //guessLetter.isCorrect = true
+        setAllKeys(prev => prev.map(el => {
+          return el.value === guessLetter.value ?
+                {...el, isCorrect: true, isDisabled: true} :
+                el
+        }))
       } else {
-        guessLetter.isCorrect = false
+        setAllKeys(prev => prev.map(el => {
+          return el.value === guessLetter.value ?
+                {...el, isCorrect: false, isDisabled: true} :
+                el
+        }))
       }
-      guessLetter.isDisabled = true
     }
   }
 
   const replay = () => {
     setGameOver(false)
+    setAllKeys(renderAllKeys())
   }
 
   function renderAllKeys() {
@@ -85,7 +94,7 @@ const App = () => {
 
     const allKeys = allLetters.map(el => ({
         value: el,
-        isDisabled: gameOver ? true : false,
+        isDisabled: false,
         isCorrect: null
     }))
 

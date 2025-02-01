@@ -7,6 +7,7 @@ const Key = ({el, handleClick}) => {
         el.isCorrect === false ? '#EC5D49' : '#FCBA29',
         opacity: el.isDisabled ? .5 : 1,
         pointerEvents: el.isDisabled ? 'none' : '',
+        transform: `scale(${el.isDisabled ? '.90' : '1'})`
     }
 
     return(

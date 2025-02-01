@@ -5,6 +5,7 @@ import List from "./components/list/List"
 import Letters from "./components/letters/Letters"
 import Keyboard from "./components/keyboard/Keyboard"
 import NewGameButton from "./components/newgame/NewGameButton"
+import ReactConfetti from 'react-confetti'
 import './App.css'
 
 const App = () => {
@@ -42,7 +43,7 @@ const App = () => {
     if (!gameOver && wordGuess.every(el => el.value !== '')) {
       setGameOver(true);
     }
-  }, [wordGuess, gameOver])
+  }, [gameOver, wordGuess])
   
   const numberOfOccurences = (guessValue) => {
     let occurences = []
@@ -81,6 +82,7 @@ const App = () => {
       <Letters wordGuess={wordGuess}/>
       <Keyboard handleClick={handleClick}/>
       {gameOver && <NewGameButton  replay={replay}/>}
+      {gameOver && <ReactConfetti />}
     </main>
   )
 }

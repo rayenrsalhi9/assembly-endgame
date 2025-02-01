@@ -43,6 +43,10 @@ const App = () => {
       setGameOver(prev => !prev);
     }
   }, [wordGuess])
+
+  useEffect(() => {
+    count === 10 && setGameOver(true)
+  }, [count])
   
   const numberOfOccurences = (guessValue) => {
     let occurences = []

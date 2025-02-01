@@ -11,7 +11,7 @@ import './App.css'
 const App = () => {
   const [word, setWord] = useState('');
   const [wordGuess, setWordGuess] = useState([])
-  const [gameOver, setGameOver] = useState(true)
+  const [gameOver, setGameOver] = useState(false)
   const [allKeys, setAllKeys] = useState(renderAllKeys())
 
   const fetchApi = () => {

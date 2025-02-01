@@ -1,19 +1,13 @@
 import propTypes from 'prop-types'
 
-const Item = (props) => {
-
-    const styles = {
-        background: props.item.background,
-        color: props.item.color
-    }
-
+const Item = ({heart}) => {
     return(
-        <span style={styles}>{props.item.value}</span>
+        <img src={heart.src} alt={heart.alt} />
     )
 }
 
 Item.propTypes = {
-    item: propTypes.string
+    heart: propTypes.object
 }
 
 export default Item

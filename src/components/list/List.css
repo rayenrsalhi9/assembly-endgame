@@ -14,3 +14,7 @@
     font-size: 12px;
     font-weight: 700;
 }
+
+.items-list > img {
+    width: 24px;
+}

@@ -80,7 +80,7 @@ const App = () => {
       {gameOver && <Screen />}
       <List />
       <Letters wordGuess={wordGuess}/>
-      <Keyboard handleClick={handleClick}/>
+      <Keyboard handleClick={handleClick} gameOver={gameOver}/>
       {gameOver && <NewGameButton  replay={replay}/>}
       {gameOver && <ReactConfetti />}
     </main>

@@ -2,7 +2,7 @@ import propTypes from 'prop-types'
 import Key from './Key'
 import './Keyboard.css'
 
-const Keyboard = ({handleClick}) => {
+const Keyboard = ({handleClick, gameOver}) => {
 
     const allLetters = [
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
@@ -12,7 +12,7 @@ const Keyboard = ({handleClick}) => {
 
     const allKeys = allLetters.map(el => ({
         value: el,
-        isDisabled: false,
+        isDisabled: gameOver ? true : false,
         isCorrect: null
     }))
 
@@ -30,7 +30,8 @@ const Keyboard = ({handleClick}) => {
 }
 
 Keyboard.propTypes = {
-    handleClick: propTypes.func
+    handleClick: propTypes.func,
+    gameOver: propTypes.bool
 }
 
 export default Keyboard

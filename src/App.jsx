@@ -73,7 +73,7 @@ const App = () => {
 
   // win case :
   useEffect(() => {
-    if (word.length > 0 && wordGuess.length > 0 && wordGuess.every(el => el.value !== '')) {
+    if (word.length > 0 && wordGuess.length > 0 && wordGuess.every(el => el.value !== '' && el.isCorrect === true)) {
       setGameWon(true)
       setGameOver(true)
       setScreen({
@@ -93,6 +93,10 @@ const App = () => {
         title: 'Game over!',
         description: 'You lose! Better start learning Assembly 😭'
       })
+      setWordGuess(prev => prev.map((el, index) => {
+        return el.value === '' ?
+        {...el, value: word[index], isCorrect: false} : el
+      }))
     }
   }, [count, hearts])
   
@@ -112,7 +116,7 @@ const App = () => {
       if (occurrences.length > 0) {
         setWordGuess(prevGuess => prevGuess.map((el, index) => {
           return occurrences.includes(index) ?
-            {...el, value: guessLetter.value} :
+            {...el, value: guessLetter.value, isCorrect: true} :
             el  
         }))
         setAllKeys(prev => prev.map(el => {

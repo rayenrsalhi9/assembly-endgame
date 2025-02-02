@@ -14,9 +14,15 @@ const App = () => {
   const [word, setWord] = useState('');
   const [wordGuess, setWordGuess] = useState([])
   const [gameOver, setGameOver] = useState(false)
+  const [gameWon, setGameWon] = useState(false)
   const [allKeys, setAllKeys] = useState(renderAllKeys())
   const [hearts, setHearts] = useState(renderHearts())
   const [count, setCount] = useState(0)
+  const [screen, setScreen] = useState({
+    background: '#282726',
+    title: '',
+    description: ''
+  })
 
   const fetchApi = () => {
     fetch('https://api.datamuse.com/words?ml=programming')
@@ -41,11 +47,22 @@ const App = () => {
   useEffect(() => {
     if (wordGuess.every(el => el.value !== '')) {
       setGameOver(prev => !prev);
+      setScreen({
+        background: '#10A95B',
+        title: 'You win!',
+        description: 'Well done! 🎉'
+      })
+      setGameWon(prev => !prev)
     }
   }, [wordGuess])
 
   useEffect(() => {
-    count === 10 && setGameOver(true)
+    count === hearts.length && setGameOver(true)
+    setScreen({
+      background: '#BA2A2A',
+      title: 'Game over!',
+      description: 'You lose! Better start learning Assembly 😭'
+    })
   }, [count])
   
   const numberOfOccurences = (guessValue) => {
@@ -90,9 +107,15 @@ const App = () => {
   const replay = () => {
     fetchApi()
     setGameOver(false)
+    setGameWon(false)
     setAllKeys(renderAllKeys())
     setHearts(renderHearts())
     setCount(0)
+    setScreen({
+      background: '#282726',
+      title: '',
+      description: ''
+    })
   }
 
   function renderAllKeys() {
@@ -122,12 +145,12 @@ const App = () => {
   return(
     <main className="app-container">
       <Header hearts={hearts}/>
-      {gameOver && <Screen />}
+      {gameOver && <Screen screen={screen}/>}
       <List hearts={hearts}/>
       <Letters wordGuess={wordGuess}/>
       <Keyboard handleClick={handleClick} allKeys={allKeys}/>
       {gameOver && <NewGameButton  replay={replay}/>}
-      {gameOver && <ReactConfetti />}
+      {gameWon && <ReactConfetti />}
     </main>
   )
 }

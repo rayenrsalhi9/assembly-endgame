@@ -1,12 +1,17 @@
+import propTypes from 'prop-types'
 import './Header.css'
 
-const Header = () => {
+const Header = ({hearts}) => {
     return(
         <header>
-            <h1>Assembly: Endgame</h1>
-            <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
+            <h1>Code: Rewind</h1>
+            <p>Guess the hidden word in under {hearts.length} tries, or your coding skills fade away forever! 💻⚡</p>
         </header>
     )
+}
+
+Header.propTypes = {
+    hearts: propTypes.array
 }
 
 export default Header

@@ -13,7 +13,7 @@ import './App.css'
 const App = () => {
   const [word, setWord] = useState('');
   const [wordGuess, setWordGuess] = useState([])
-  const [gameOver, setGameOver] = useState(true)
+  const [gameOver, setGameOver] = useState(false)
   const [allKeys, setAllKeys] = useState(renderAllKeys())
   const [hearts, setHearts] = useState(renderHearts())
   const [count, setCount] = useState(0)
@@ -121,7 +121,7 @@ const App = () => {
 
   return(
     <main className="app-container">
-      <Header />
+      <Header hearts={hearts}/>
       {gameOver && <Screen />}
       <List hearts={hearts}/>
       <Letters wordGuess={wordGuess}/>
